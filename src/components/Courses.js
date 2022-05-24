@@ -1,4 +1,4 @@
-import Modal from './Modal'
+import CoursesModal from './CoursesModal'
 import { Box } from '@mui/material'
 import TableCourse from './TableCourse'
 
@@ -17,7 +17,7 @@ const Courses = ({open, setOpen, courses, loadData, editForm, openEditModal, han
           <Box className='header-course'>
             <h2>Courses</h2>
             <Box className='modal'>
-              <Modal 
+              <CoursesModal 
                 open = {open}
                 setOpen = {setOpen} 
                 loadData = {loadData} 
