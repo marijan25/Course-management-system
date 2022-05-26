@@ -2,26 +2,35 @@ import TopBar from "./components/TopBar";
 import Courses from "./components/Courses";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { getCourses } from "./CourseService";
+import { getCourses } from "./Services";
 import { makeStyles } from '@material-ui/core'
 import {BrowserRouter, Route, Link, Routes} from 'react-router-dom'
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import CoursesList from './components/CoursesList'
+import Teachers from "./components/Teachers";
+import Students from "./components/Students"
+import Footer from "./components/Footer";
 
 const useStyle = makeStyles((theme) => ({
-  drawerPaper: {
-    width: 'inherit', 
-    zIndex: '-1'
-  },
   drawer: {
-    paddingTop: theme.spacing(10),
+    display: 'flex'
   },
   list: {
     paddingTop: theme.spacing(8),
+    position: 'fixed',
+    height: '100vh',
+    borderRight: '1px solid #efebe9',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(7),
+    },
   },
   button: {
     border: '0.5px solid #efebe9',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    width: '180px',
+    [theme.breakpoints.down('xs')]: {
+      width: '100px'
+    }
   },
   link: {
     textDecoration: 'none',
@@ -53,14 +62,7 @@ function App() {
     <Box>
       <TopBar />
       <BrowserRouter>
-        <Box style={{display: 'flex'}} className={classes.drawer}>
-          <Drawer
-            style={{width: '150px'}}
-            variant="persistent"
-            anchor="left"
-            open={true}
-            classes={{paper: classes.drawerPaper}}
-          >
+        <Box className={classes.drawer}>
             <List className={classes.list}>
               <Link to="/" className={classes.link}>
                 <ListItem button className={classes.button}>
@@ -74,16 +76,15 @@ function App() {
               </Link>
               <Link to="/teacher" className={classes.link}>
                 <ListItem button className={classes.button}>
-                  <ListItemText primary={"Teacher"} />
+                  <ListItemText primary={"Teachers"} />
                 </ListItem>
               </Link>
               <Link to="/student" className={classes.link}>
                 <ListItem button className={classes.button}>
-                  <ListItemText primary={"Student"} />
+                  <ListItemText primary={"Students"} />
                 </ListItem>
               </Link>
             </List>
-          </Drawer>
           <Routes>
             <Route exact path="/" element=
               {
@@ -102,11 +103,12 @@ function App() {
                   setEditForm = {setEditForm}
                 />
               }/>
-            <Route exact path="/teacher" element={"Teacher"}/>
-            <Route exact path="/student" element={"Student"}/>
+            <Route exact path="/teacher" element={<Teachers />}/>
+            <Route exact path="/student" element={<Students />}/>
           </Routes>
         </Box>
       </BrowserRouter>
+      <Footer />
     </Box>
   );
 }

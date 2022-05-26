@@ -4,31 +4,55 @@
       "courseName": "json-server",
       "startDate": "2022-05-20",
       "endDate": "2022-06-21",
-      "id": 2
+      "id": 1
     },
     {
       "courseName": "Spain",
       "startDate": "2022-05-21",
       "endDate": "2022-05-29",
-      "id": 3
+      "id": 2
     },
     {
       "courseName": "English",
       "startDate": "2022-05-24",
       "endDate": "2022-05-31",
-      "id": 4
+      "id": 3
     },
     {
       "courseName": "German",
       "startDate": "2022-05-25",
       "endDate": "2022-06-30",
-      "id": 5
+      "id": 4
     },
     {
       "courseName": "Chinese",
       "startDate": "2022-05-28",
       "endDate": "2022-07-11",
-      "id": 6
+      "id": 5
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "teacherName": "Marko",
+      "teacherSurname": "Markovic"
+    },
+    {
+      "id": 2,
+      "teacherName": "Milan",
+      "teacherSurname": "Milanovic"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "studentName": "Ivan",
+      "studentSurname": "Ivanovic"
+    },
+    {
+      "id": 2,
+      "studentName": "Maja",
+      "studentSurname": "Majovic"
     }
   ]
 }

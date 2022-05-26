@@ -1,7 +1,9 @@
-import CoursesModal from './CoursesModal'
+import TeachersModal from './TeachersModal'
 import { Box } from '@mui/material'
-import TableCourse from './TableCourse'
 import { makeStyles } from '@material-ui/core'
+import { useState, useEffect } from 'react'
+import TableTeachers from './TableTeachers'
+import { getTeachers } from '../Services'
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -15,22 +17,22 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: '200px',
       paddingTop: theme.spacing(7),
       width: '1460px',
-      },
+    },
     [theme.breakpoints.down('md')]: {
       paddingLeft: '200px',
       paddingTop: theme.spacing(7),
       width: '1200px',
-      },
+    },
     [theme.breakpoints.down('sm')]: {
       paddingLeft: '200px',
       paddingTop: theme.spacing(7),
       width: '900px',
-      },
-      [theme.breakpoints.down('xs')]: {
-        paddingLeft: '110px',
-        paddingTop: theme.spacing(6),
-        minWidth: '260px'
-      }
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: '110px',
+      paddingTop: theme.spacing(6),
+      minWidth: '260px'
+    }
   },
   titlePage: {
     textShadow: '0 0 3px blue',
@@ -44,29 +46,47 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   modal: {
-      paddingTop: theme.spacing(2.2),
+    paddingTop: theme.spacing(2.2),
   }
 }))
 
-const Courses = ({open, setOpen, courses, loadData, editForm, openEditModal, handleCloseModal, setEditForm}) => {
+const Teachers = () => {
+  const [open, setOpen] = useState(false)
+  const [teachers, setTeachers] = useState([])
+  useEffect(() => {
+    loadTeachers()
+  }, [])
+  const loadTeachers = () => getTeachers().then((teacher) => setTeachers(teacher))
+  const [editForm, setEditForm] = useState({});
+  const handleCloseModal = () => {
+    setOpen(false)
+  }
+  const loadData = () => {
+    handleCloseModal()
+    loadTeachers()
+  }
+  const openEditModal = (teacher) => {
+    setEditForm(teacher)
+    setOpen(true)
+  }
   const classes = useStyles()
   return (
     <Box className={classes.table}>
       <Box className={classes.header}>
-        <h2 className={classes.titlePage}>Courses</h2>
+        <h2 className={classes.titlePage}>Teachers</h2>
         <Box className={classes.modal}>
-          <CoursesModal 
+          <TeachersModal 
             open = {open}
-            setOpen = {setOpen} 
+            setOpen = {setOpen}
             loadData = {loadData} 
             editForm = {editForm}
             handleCloseModal = {handleCloseModal}  
-            setEditForm = {setEditForm}
+            setEditForm = {setEditForm} 
           />  
         </Box>
       </Box>
-      <TableCourse 
-        courses = {courses} 
+      <TableTeachers 
+        teachers = {teachers}
         loadData = {loadData} 
         openEditModal = {openEditModal}
       />
@@ -74,4 +94,4 @@ const Courses = ({open, setOpen, courses, loadData, editForm, openEditModal, han
   )
 }
 
-export default Courses
+export default Teachers

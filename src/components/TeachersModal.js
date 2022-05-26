@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/material';
-import ManageCourseForm from './ManageCourseForm';
+import ManageTeacherForm from './ManageTeacherForm';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -19,8 +19,8 @@ export default function CustomizedDialogs({open, setOpen, courses, loadData, edi
     <Box className='modal'>
       <Button  
         onClick={() => {
-        setOpen(true)
-        setEditForm({})}}
+          setOpen(true)
+          setEditForm({})}}
       >
         Add New
       </Button>
@@ -30,12 +30,12 @@ export default function CustomizedDialogs({open, setOpen, courses, loadData, edi
         open={open}
       >
         <DialogContent dividers>
-          <ManageCourseForm 
+          <ManageTeacherForm 
             setOpen = {setOpen} 
             courses = {courses} 
             loadData = {loadData} 
             editForm = {editForm}
-            handleCloseModal = {handleCloseModal}  
+            handleCloseModal = {handleCloseModal} 
           />
         </DialogContent>
       </BootstrapDialog>

@@ -6,9 +6,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import DeleteCourseModal from './DeleteCourseModal'
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
+import DeleteStudentModal from './DeleteStudentModal'
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
@@ -20,10 +20,10 @@ const useStyles = makeStyles(() => ({
   },
   editIcon: {
     marginRight: '-10px'
-  },
+  }
 }))
 
-export default function BasicTable({courses, loadData, openEditModal}) {
+export default function BasicTable({students, loadData, openEditModal}) {
   const classes = useStyles()
   return (
     <TableContainer component={Paper}>
@@ -31,31 +31,29 @@ export default function BasicTable({courses, loadData, openEditModal}) {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell align="right">Course name</TableCell>
-            <TableCell align="right">Start date</TableCell>
-            <TableCell align="right">End date</TableCell>
-            <TableCell align="right">Edit/Delete</TableCell>
+            <TableCell align="right">Student name</TableCell>
+            <TableCell align="right">Student surname</TableCell>
+            <TableCell align='right'>Edit/Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {courses.map((course) => (
+          {students.map((student) => (
             <TableRow
-              key={course.id}
+              key={student.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {course.id}
+                {student.id}
               </TableCell>
-              <TableCell align="right">{course.courseName}</TableCell>
-              <TableCell align="right">{course.startDate}</TableCell>
-              <TableCell align="right">{course.endDate}</TableCell>
+              <TableCell align="right">{student.studentName}</TableCell>
+              <TableCell align="right">{student.studentSurname}</TableCell>
               <TableCell align="right">
                 <Box className={classes.icons}>
                   <Box className={classes.editIcon}>
-                    <Button onClick={() => openEditModal(course)}> <EditIcon /> </Button>
+                    <Button onClick={() => openEditModal(student)}> <EditIcon /> </Button>
                   </Box>
                   <Box className={classes.deleteIcon}>
-                    <DeleteCourseModal course = {course} loadData = {loadData}/>
+                    <DeleteStudentModal student = {student} loadData = {loadData}/>
                   </Box>
                 </Box>
               </TableCell>

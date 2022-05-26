@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteNoteForm from './DeleteNoteForm';
+import DeleteTeacherForm from './DeleteTeacherForm';
 import { useState } from 'react'
 
 const style = {
@@ -20,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({course, loadData}) {
+export default function TransitionsModal({teacher, loadData}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,8 +41,8 @@ export default function TransitionsModal({course, loadData}) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <DeleteNoteForm 
-              course = {course}
+            <DeleteTeacherForm 
+              teacher = {teacher}
               setOpen = {setOpen} 
               loadData = {loadData}
             />
