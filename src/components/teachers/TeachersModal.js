@@ -3,7 +3,19 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { Box } from '@mui/material';
-import ManageStudentForm from './ManageStudentForm';
+import ManageTeacherForm from '../teachers/ManageTeacherForm';
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles(() => ({
+  button: {
+    width: '110px',
+    height: '40px',
+    color: 'black',
+  },
+  buttonName: {
+    color: 'black',
+  }
+}))
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -15,14 +27,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function CustomizedDialogs({open, setOpen, courses, loadData, editForm, handleCloseModal, setEditForm}) {
+  const classes = useStyles()
   return (
     <Box className='modal'>
       <Button  
         onClick={() => {
           setOpen(true)
           setEditForm({})}}
-      >
-        Add New
+          className={classes.button}
+          variant="outlined"
+          >
+          <p className={classes.buttonName}>Add New</p>
       </Button>
       <BootstrapDialog
         onClose={() => setOpen(false)}
@@ -30,7 +45,7 @@ export default function CustomizedDialogs({open, setOpen, courses, loadData, edi
         open={open}
       >
         <DialogContent dividers>
-          <ManageStudentForm 
+          <ManageTeacherForm 
             setOpen = {setOpen} 
             courses = {courses} 
             loadData = {loadData} 

@@ -12,11 +12,20 @@ import { Button } from '@mui/material';
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
+  tableCell: {
+    width: '200px'
+  },
+  tableCellId: {
+    width: '125px'
+  },
+  tableCellStartDate: {
+    width: '175px'
+  },
   icons: {
     display: 'inline-flex'
   },
   deleteIcon: {
-    marginRight: '-25px'
+    marginRight: '-24px'
   },
   editIcon: {
     marginRight: '-10px'
@@ -30,25 +39,23 @@ export default function BasicTable({courses, loadData, openEditModal}) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell align="right">Course name</TableCell>
-            <TableCell align="right">Start date</TableCell>
-            <TableCell align="right">End date</TableCell>
-            <TableCell align="right">Edit/Delete</TableCell>
+            <TableCell className={classes.tableCellId}>Id</TableCell>
+            <TableCell className={classes.tableCell}>Course name</TableCell>
+            <TableCell className={classes.tableCellStartDate}>Start date</TableCell>
+            <TableCell className={classes.tableCell}>End date</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {courses.map((course) => (
             <TableRow
               key={course.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{'&:last-child td, &:last-child th': { border: 0 }}}
             >
-              <TableCell component="th" scope="row">
-                {course.id}
-              </TableCell>
-              <TableCell align="right">{course.courseName}</TableCell>
-              <TableCell align="right">{course.startDate}</TableCell>
-              <TableCell align="right">{course.endDate}</TableCell>
+              <TableCell>{course.id}</TableCell>
+              <TableCell>{course.courseName}</TableCell>
+              <TableCell>{course.startDate}</TableCell>
+              <TableCell>{course.endDate}</TableCell>
               <TableCell align="right">
                 <Box className={classes.icons}>
                   <Box className={classes.editIcon}>

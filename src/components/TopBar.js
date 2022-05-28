@@ -4,8 +4,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import SideBar from './SideBar';
+import { useState } from 'react';
 
 export default function TopBar() {
+  const [show, setShow] = useState(false);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='fixed'>
@@ -16,6 +19,7 @@ export default function TopBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => setShow(!show)}
           >
             <MenuIcon />
           </IconButton>
@@ -24,6 +28,7 @@ export default function TopBar() {
           </Typography>
         </Toolbar>
       </AppBar>
+      <SideBar show = {show}/>
     </Box>
   );
 }

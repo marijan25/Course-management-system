@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteTeacherForm from './DeleteTeacherForm';
+import DeleteStudentForm from './DeleteStudentForm';
 import { useState } from 'react'
 
 const style = {
@@ -12,7 +12,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 150,
+  width: 245,
   textAlign: 'center',
   bgcolor: 'background.paper',
   border: '2px solid #000',
@@ -20,14 +20,14 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({teacher, loadData}) {
+export default function TransitionsModal({student, loadData}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <Box>
-      <Button onClick={handleOpen}><DeleteIcon /></Button>
+      <Button onClick={handleOpen}><DeleteIcon color='error'/></Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -41,8 +41,8 @@ export default function TransitionsModal({teacher, loadData}) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <DeleteTeacherForm 
-              teacher = {teacher}
+            <DeleteStudentForm 
+              student = {student}
               setOpen = {setOpen} 
               loadData = {loadData}
             />

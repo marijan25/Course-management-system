@@ -1,10 +1,12 @@
 import { Grid, Paper, Box } from "@mui/material"
 import { makeStyles } from '@material-ui/core'
+import { getCourses } from "../services/CoursesService"
+import { useState, useEffect } from "react"
 
 const useStyle = makeStyles((theme) => ({
   paper: {
     '&.MuiPaper-root': {
-      backgroundColor: 'royalblue'
+      backgroundColor: '#1976d2',
     },
     width: '260px',
     height: '80px',
@@ -31,9 +33,35 @@ const useStyle = makeStyles((theme) => ({
       height: '800px'
     },
     [theme.breakpoints.down('sm')]: {
-      gap: '20px'
+      gap: '50px'
     },
-  }, 
+    '&.MuiGrid-root': {
+      [theme.breakpoints.down('xs')]: {
+        marginBottom: '60px',
+        gap: '10px'
+      },
+    },
+  },
+  containerHide: {
+    height: '500px',
+    paddingTop: theme.spacing(10),
+    paddingLeft: theme.spacing(20),
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(15),
+      paddingTop: theme.spacing(9),
+      height: '800px'
+    },
+    [theme.breakpoints.down('sm')]: {
+      gap: '50px'
+    },
+    '&.MuiGrid-root': {
+      [theme.breakpoints.down('xs')]: {
+        paddingLeft: '70px',
+        marginBottom: '60px',
+        gap: '10px'
+      },
+    },
+  },  
   courseName: {
     textShadow: '0 0 3px blue',
     color: 'white',
@@ -59,12 +87,17 @@ const useStyle = makeStyles((theme) => ({
   }
 }))
 
-const CoursesList = ({courses}) => {
+const Home = ({show}) => {
   const classes = useStyle()
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    loadCourses()
+  }, [])
+  const loadCourses = () => getCourses().then((course) => setCourses(course))
   return (
-    <Grid container className={classes.container}>
+    <Grid container className={show ? classes.container : classes.containerHide}>
       {courses.map((course) => (
-        <Grid item lg={3} md={4} key={course.id}>
+        <Grid item xs={12} sm = {6} lg={3} md={4} key={course.id}>
           <Paper elevation={10} className={classes.paper}>
             <Box className={classes.box}>
               <Box className={classes.courseName}><h2 className={classes.title}>{course.courseName}</h2></Box>
@@ -84,4 +117,4 @@ const CoursesList = ({courses}) => {
   )
 }
 
-export default CoursesList
+export default Home

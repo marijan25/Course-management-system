@@ -8,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
-import DeleteStudentModal from './DeleteStudentModal'
+import DeleteTeacherModal from '../teachers/DeleteTeacherModal'
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
@@ -20,40 +20,41 @@ const useStyles = makeStyles(() => ({
   },
   editIcon: {
     marginRight: '-10px'
+  },
+  tableCell: {
+    paddingLeft: '10%'
   }
 }))
 
-export default function BasicTable({students, loadData, openEditModal}) {
+export default function BasicTable({teachers, loadData, openEditModal}) {
   const classes = useStyles()
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell align="right">Student name</TableCell>
-            <TableCell align="right">Student surname</TableCell>
-            <TableCell align='right'>Edit/Delete</TableCell>
+            <TableCell className={classes.tableCell}>Id</TableCell>
+            <TableCell >Full name</TableCell>
+            <TableCell align='right'>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {students.map((student) => (
+          {teachers.map((teacher) => (
             <TableRow
-              key={student.id}
+              key={teacher.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {student.id}
+                {teacher.id}
               </TableCell>
-              <TableCell align="right">{student.studentName}</TableCell>
-              <TableCell align="right">{student.studentSurname}</TableCell>
+              <TableCell>{teacher.teacherName} {teacher.teacherSurname}</TableCell>
               <TableCell align="right">
                 <Box className={classes.icons}>
                   <Box className={classes.editIcon}>
-                    <Button onClick={() => openEditModal(student)}> <EditIcon /> </Button>
+                    <Button onClick={() => openEditModal(teacher)}> <EditIcon /> </Button>
                   </Box>
                   <Box className={classes.deleteIcon}>
-                    <DeleteStudentModal student = {student} loadData = {loadData}/>
+                    <DeleteTeacherModal teacher = {teacher} loadData = {loadData}/>
                   </Box>
                 </Box>
               </TableCell>
