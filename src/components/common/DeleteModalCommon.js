@@ -1,4 +1,3 @@
-import { deleteCourse } from '../../services/CoursesService'
 import { Stack, Button, Box } from '@mui/material'
 import { makeStyles } from '@material-ui/core'
 
@@ -48,25 +47,18 @@ const useStyles = makeStyles((theme) => ({
       width: '293px',
     }
   },
-  buttonStack: {
-    paddingLeft: '260px',
-    paddingTop: '10px',
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: '90px',
-    }
-  }
 }))
 
-const DeleteCourseForm = ({course, setOpen, loadData}) => {
+const DeleteModalCommon = ({setOpen, titleText, deleteText, onClick}) => {
   const classes = useStyles()
   return (
     <Box>
-      <h1 className={classes.titleModal}><p className={classes.positionTitle}>Delete course</p></h1>
-      <p className={classes.deleteMessage}>Delete "{course.courseName}"?</p>
+      <h1 className={classes.titleModal}><p className={classes.positionTitle}>{titleText}</p></h1>
+      <p className={classes.deleteMessage}>Delete "{deleteText}"?</p>
       <Box className={classes.buttonBox}>
         <Stack spacing={3} direction='row'>
           <Button 
-            onClick={() => deleteCourse(course.id).then(loadData)} 
+            onClick={onClick} 
             className={classes.button} 
             variant="outlined" 
           >
@@ -85,4 +77,4 @@ const DeleteCourseForm = ({course, setOpen, loadData}) => {
   )
 }
 
-export default DeleteCourseForm
+export default DeleteModalCommon

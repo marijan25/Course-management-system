@@ -4,8 +4,9 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteTeacherForm from '../teachers/DeleteTeacherForm';
+import DeleteModalCommon from '../common/DeleteModalCommon';
 import { useState } from 'react'
+import { deleteTeacher } from '../../services/TeachersService'
 
 const style = {
   position: 'absolute',
@@ -41,11 +42,12 @@ export default function TransitionsModal({teacher, loadData}) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <DeleteTeacherForm 
-              teacher = {teacher}
-              setOpen = {setOpen} 
-              loadData = {loadData}
-            />
+          <DeleteModalCommon 
+            titleText="Delete teacher" 
+            deleteText={teacher.teacherName + (" ") + teacher.teacherSurname} 
+            onClick = {() => deleteTeacher(teacher.id).then(loadData)}
+            setOpen = {setOpen}
+          />
           </Box>
         </Fade>
       </Modal>

@@ -62,30 +62,6 @@ const useStyles = makeStyles((theme) => ({
       minWidth: '260px'
     }
   },
-  titlePage: {
-    color: 'black',
-    fontWeight: '500',
-    fontFamily: 'Roboto',
-    width: '92.5%',
-    [theme.breakpoints.down('xs')]: {
-      width: '59%',
-    }
-  },
-  titlePageHide: {
-    color: 'black',
-    fontFamily: "Roboto",
-    width: '93.4%',
-    [theme.breakpoints.down('xs')]: {
-      width: '70%',
-    }
-  },
-  header: {
-    display: 'flex'
-  },
-  modal: {
-    paddingTop: theme.spacing(2.2),
-    width: '100px'
-  }
 }))
 
 const Courses = ({show}) => {
@@ -110,19 +86,14 @@ const Courses = ({show}) => {
   }
   return (
     <Box className={show ? classes.table : classes.tableHide}>
-      <Box className={classes.header}>
-        <h2 className={show ? classes.titlePage : classes.titlePageHide}>Courses</h2>
-        <Box className={classes.modal}>
-          <CoursesModal 
-            open = {open}
-            setOpen = {setOpen} 
-            loadData = {loadData} 
-            editForm = {editForm}
-            handleCloseModal = {handleCloseModal}  
-            setEditForm = {setEditForm}
-          />  
-        </Box>
-      </Box>
+      <CoursesModal 
+        open = {open}
+        setOpen = {setOpen} 
+        loadData = {loadData} 
+        editForm = {editForm}
+        handleCloseModal = {handleCloseModal}  
+        setEditForm = {setEditForm}
+      />
       <TableCourse 
         courses = {courses} 
         loadData = {loadData} 
